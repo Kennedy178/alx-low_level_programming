@@ -1,42 +1,15 @@
 #include "main.h"
 /**
-* print_rev - imprime en reversa
-* @s: string
-* return: 0
+* reset_to_98 - a function that takes a pointer to an int as parameter
+* and updates the value it points to to 98
+* @n: input
+* Return: n
 */
 
-void print_rev(char *s)
+void reset_to_98(int *n)
 
 {
 
-int longi = 0;
-
-int o;
-
-
-while (*s != '\0')
-
-{
-
-longi++;
-
-s++;
-
-}
-
-s--;
-
-for (o = longi; o > 0; o--)
-
-{
-
-_putchar(*s);
-
-s--;
-
-}
-
-
-_putchar('\n');
+*n = 98;
 
 }

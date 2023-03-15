@@ -1,1 +1,1 @@
-static libraries creation
+README.md for static files

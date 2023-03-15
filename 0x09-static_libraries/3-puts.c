@@ -1,19 +1,27 @@
 #include "main.h"
-void _puts(char *str)
-
-/* _puts -  Entry point
-*
- * Return: Always 0 (Success)
- */
-#include<stdio.h>
 
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success)
+ * _puts - function declaration
+ * @str: string pointer
+ * Return: void
  */
-int main(void)
+
+void _puts(char *str);
+
+/**
+ * _puts - function definition
+ * Description: prints a string
+ * @str: the string pointer
+ * Return: void
+ */
+
+void _puts(char *str)
 {
-	puts("\"Programming is like building a multilingual puzzle");
-	return (0);
+	int index;
+
+	for (index = 0; *(str + index) != '\0'; index++)
+	{
+		_putchar(*(str + index));
+	}
+	_putchar('\n');
 }

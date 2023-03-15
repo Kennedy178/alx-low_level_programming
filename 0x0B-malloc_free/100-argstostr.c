@@ -1,45 +1,51 @@
 #include <stdlib.h>
-#include "holberton.h"
+#include <string.h>
+#include "main.h"
 
 /**
-* *argstostr - concatenates all the arguments of the program
-* @ac: number of arguments
-* @av: array of arguments
-*
-* Return: Pointer to the new string (Success), NULL (Error)
-*/
+ * argstostr - function declaration
+ * @ac: no of args
+ * @av: array of pointer
+ * Return: char type
+ */
+
+char *argstostr(int ac, char **av);
+
+/**
+ * argstostr - function definition
+ * @ac: number of arguments
+ * @av: array of pointers to argumnets
+ * Description: Return NULL of pointer to string
+ * Return: NULL or a pointer to a string
+ */
+
 char *argstostr(int ac, char **av)
 {
-	int i, j, k, len;
+	int row, column, len = 0, total_len = 0;
 	char *str;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
-	for (i = 0; i < ac; i++)
+	for (row = 0; row < ac; row++)
 	{
-		for (j = 0; av[i][j] != '\0'; j++)
-			len++;
-		len++;
+		len = strlen(av[row]);
+		total_len += len + 1;
 	}
 
-	str = malloc(sizeof(char) * (len + 1));
-
+	str = (char *) malloc(total_len * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 
-	k = 0;
-
-	for (i = 0; i < ac; i++)
+	len = 0;
+	for (row = 0; row < ac; row++)
 	{
-		for (j = 0; av[i][j] != '\0'; j++)
+		for (column = 0; av[row][column] != '\0'; column++)
 		{
-			str[k] = av[i][j];
-			k++;
+			str[len++] = av[row][column];
 		}
-		str[k] = '\n';
-		k++;
+		str[len++] = '\n';
 	}
-
+	str[len] = '\0';
 	return (str);
 }

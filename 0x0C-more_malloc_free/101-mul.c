@@ -1,100 +1,98 @@
 #include "main.h"
-#include <ctype.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 /**
- * mul - a program that multiplies two positive numbers.
- * @num1: first number, second argument
- * @l1: length of string 1
- * @l2: length of stirng 0
- * @num2: second number, third argument
- *
- * Description
- * - num1 and num2 will be passed in base 10
- * - Print the result, followed by a new line
- */
-
-void *mul(char *n1, int l1, char *n2, int l2)
+* _isNum - check if is a number
+*@num: string to check
+*Return: 1 is numm, 0 not num
+*/
+int _isNum(char *num)
 {
-	int i, multiply;
-	char *sol;
-	printf("%s, %s", n1, n2);
+	int i;
 
-	(void) multiply;
-	sol = malloc(l1 + l2 + 1);
-	if (sol == NULL)
-		return (NULL);
-
-	for (i = 0; i < (l1 + l2 + 1); i++)
-		sol[i] = '0';
-
-	i = 0;
-	while (i < l1)
+	for (i = 0; num[i] != '\0'; i++)
 	{
-		multiply = n1[i] * n2[i];
-
+		if (num[i] < '0' || num[i] > '9')
+			return (0);
 	}
-
-	return (sol);
+	return (1);
 }
 
 /**
- * _isdigit - check for digit
- * @argv: argument vector
- *
- * Return: 0 when it is true and 1 if it is not
- */
-
-int _isdigit(char **argv)
+* *_memset - copies a character to the firstn characters of the string pointed
+*@s: original string
+*@b: value to remplace
+*@n: number of bytes
+*Return: s (string modify)
+*/
+char *_memset(char *s, char b, unsigned int n)
 {
-	int i, j, s;
+	unsigned int i;
 
-	s = 0;
-	for (i = 1; i < 3; i++)
-	{
-		for (j = 0; argv[i][j] != '\0'; j++)
-		{
-			printf("%s", argv[i]);
-			if (argv[i][j] < '0' || argv[i][j] > '9')
-			{
-				printf("Error\n");
-				exit(98);
-			}
-		}
-	}
+	for (i = 0; i < n; i++)
+		s[i] = b;
 	return (s);
 }
 
 /**
- * main - run program
- * @argc: argument count
- * @argv: argument vector
- *
- * - If the number of arguments is incorrect, print Error, followed by a new
- *   line, and exit with a status of 98
- * - num1 and num2 should only be composed of digits.
- *   If not, print Error, followed by a new line, and exit with a status of 98
- *
- * Return: 0 success
- */
+* _strlen - returns the lenght of a string
+*@s: poiter of character
+*Return: the length of a string
+*/
+int _strlen(char *s)
+{
+	int len;
 
+	len = 0;
+	while (*(s + len) != '\0')
+		len++;
+	return (len);
+}
+
+/**
+* main - multiple 2 positive numbers
+*@argc: argument counter
+*@argv: number to multiply
+*Return: 0 (success)
+*/
 int main(int argc, char *argv[])
 {
-	int l1, l2;
-	printf("%d", argc);
+	int length, c, prod, i, j, l1, l2;
+	int *res;
 
-	l1 = strlen(argv[1]);
-	l2 = strlen(argv[2]);
-
-	_isdigit(argv);
-
-	(void) argc;
-	/* if (!(argc == 3))
+	if ((argc != 3 || !(_isNum(argv[1]))) || !(_isNum(argv[2])))
+		puts("Error"), exit(98);
+	l1 = _strlen(argv[1]), l2 = _strlen(argv[2]);
+	length = l1 + l2;
+	res = calloc(length, sizeof(int *));
+	if (res == NULL)
+		puts("Error"), exit(98);
+	for (i = l2 - 1; i > -1; i--)
 	{
-		printf("Error\n");
-		exit(98);
-	} */
+		c = 0;
+		for (j = l1; j > -1; j--)
+		{
+			prod = (argv[2][i] - '0') * (argv[1][j] - '0');
+			c = (prod / 10);
+			res[(i + j) + 1] += (prod % 10);
+			if (res[(i + j) + 1] > 9)
+			{
+				res[i + j] += res[(i + j) + 1] / 10;
+				res[(i + j) + 1] = res[(i + j) + 1] % 10;
+			}
+			res[(i + j) + 1] += c;
+		}
+	}
 
-	mul(argv[1], l1, argv[2], l2);
+	if (res[0] == 0)
+		i = 1;
+	else
+		i = 0;
+	for (; i < length; i++)
+		printf("%d", res[i]);
 
+	printf("\n");
+	free(res);
 	return (0);
 }

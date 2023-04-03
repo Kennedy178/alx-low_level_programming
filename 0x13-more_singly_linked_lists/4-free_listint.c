@@ -2,7 +2,7 @@
 
 /**
  * free_listint - frees list
- * @head:truct head
+ * @head: struct head
  *
  */
 

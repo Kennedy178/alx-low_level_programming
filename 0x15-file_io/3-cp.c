@@ -50,10 +50,7 @@ void close_file(int ken)
  */
 int main(int argc, char *argv[])
 {
-	int neke;
-	int lesh;
-	int learn;
-	int run;
+	int neke, lesh, learn, run;
 
 	char *buffer;
 

@@ -3,10 +3,10 @@
 #include <stdlib.h>
 
 /**
- * create_buffer - free 1024 bytes for a buffer.
- * @file: chars being stored on the buffer
+ * create_buffer - free 1024 bytes.
+ * @file: chars to store on the buffer.
  *
- * Return: slotted buffer pointer destination.
+ * Return: climax of slotted buffer pointer.
  */
 char *create_buffer(char *file)
 {
